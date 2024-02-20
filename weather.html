@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Assignment</title>
+</head>
+<style>
+#container{
+    height: 500px;
+    width: 700px;
+    background-color: blueviolet;
+}
+</style>
+<body>
+    <input type="text" placeholder="Enter city name" id="cityname">
+    <button onclick="checkit()" >Check Weather</button>
+    <div id="display">
+
+    </div>
+</body>
+</html>
+
+<script>
+    let key = 'aa17a9f5eabeeca57acee9c70208945f'
+    let cityname = document.getElementById('cityname')
+    let display_ = document.getElementById('display')
+    function checkit() {
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityname.value}&appid=${key}`).then((res)=>res.json()).then((data)=>{
+            display_.innerHTML = `
+                <h1>City Name: ${data.name}</h1><br>
+                <h1>Description: ${data.weather[0].description}</h1><br>
+                <h1>Temperature: ${data.main.temp}</h1>
+                <h1>Wind Degree: ${data.wind.deg}</h1>
+            `
+        })
+    }
+
+</script>
